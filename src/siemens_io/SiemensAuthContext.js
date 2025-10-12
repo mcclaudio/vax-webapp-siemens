@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
+import { SiemensLogInfo, SiemensLogError } from "./SiemensLog"
 
 const SiemensAuthContext = createContext({ token: null });
 
@@ -8,7 +9,7 @@ export const SiemensAuthProvider = ({ children }) => {
   const myTimersRef = useRef({});
   const refreshRun = useRef(null);
 
-  const { REACT_APP_ENABLE_LOG_SIEMENS_IO } = process.env
+
 
   const login = async () => {
     try {
@@ -35,14 +36,11 @@ export const SiemensAuthProvider = ({ children }) => {
         throw new Error(`Siemens Error: Code: ${data.error.code}. Message: ${data.error.message}`)
 
       SetCurrentToken(data.result.token);
-
-      if (REACT_APP_ENABLE_LOG_SIEMENS_IO === 'true')
-        console.log(`Siemens Login . Token: \\"${tokeRef.current}\\". Date: ${Date.now()}`);
+      SiemensLogInfo(`Siemens Login . Token: \\"${tokeRef.current}\\". Date: ${Date.now()}`);
     }
     catch (err) {
       SetCurrentToken(null);
-      if (REACT_APP_ENABLE_LOG_SIEMENS_IO === 'true')
-        console.error('Login failed:', err);
+      SiemensLogError('Login failed:', err);
     }
   };
 
@@ -54,8 +52,7 @@ export const SiemensAuthProvider = ({ children }) => {
   const refreshToken = async () => {
 
     if (refreshRun.current !== null) {
-      if (REACT_APP_ENABLE_LOG_SIEMENS_IO === 'true')
-        console.log(`FatchData SiemensAuthProvider Skipped. Date: ${Date.now()}`);
+      SiemensLogInfo(`FatchData SiemensAuthProvider Skipped. Date: ${Date.now()}`);
       return;
     }
 
@@ -86,16 +83,12 @@ export const SiemensAuthProvider = ({ children }) => {
         if (data.error)
           throw new Error(`Siemens Error: Code: ${data.error.code}. Message: ${data.error.message}`)
 
-        /* SetCurrentToken(data.result) */
-
-        if (REACT_APP_ENABLE_LOG_SIEMENS_IO === 'true')
-          console.log(`Token extednded. Date: ${Date.now()}`);
+        SiemensLogInfo(`Token extednded. Date: ${Date.now()}`);
       }
     }
     catch (err) {
-      if (REACT_APP_ENABLE_LOG_SIEMENS_IO === 'true')
-        console.error('Token refresh failed:', err);
       SetCurrentToken(null);
+      SiemensLogError('Token refresh failed:', err);
     }
     finally {
       refreshRun.current = null;

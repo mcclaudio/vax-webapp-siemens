@@ -1,6 +1,6 @@
 import DeviceMonitor from '../compnents/siemens/DeviceMonitor';
 import DeviceMonitor2 from '../compnents/siemens/DeviceMonitor2';
-import { SiemensPollingProvider } from '../siemens_io/utils/SiemensPollingContext';
+import { SiemensPollingProvider } from '../siemens_io/SiemensPollingContext';
 
 export default function Home() {
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useApi } from '../../siemens_io/utils/UseApi';
+import { useApi } from '../../siemens_io/UseApi';
 
 const DeviceStatus = () => {
     const api = useApi();

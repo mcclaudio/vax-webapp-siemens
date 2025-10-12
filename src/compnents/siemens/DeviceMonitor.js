@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useSiemensPolling } from '../../siemens_io/utils/SiemensPollingContext';
+import { useSiemensPolling } from '../../siemens_io/SiemensPollingContext';
 const pullerName = "device-monitor";
 
 const DeviceMonitor = () => {

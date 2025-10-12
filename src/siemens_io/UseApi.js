@@ -1,18 +1,15 @@
 import { useEffect, useRef } from 'react';
-import { useSiemensAuth } from '../auth/SiemensAuthContext';
-
+import { useSiemensAuth } from '../siemens_io/SiemensAuthContext';
+import { SiemensLogInfo } from './SiemensLog';
 export const useApi = () => {
   const { token } = useSiemensAuth();
 
   const apiToken = useRef({});
 
-  const { REACT_APP_ENABLE_LOG_SIEMENS_IO } = process.env
-
   useEffect(() => {
 
     apiToken.current = token;
-    if (REACT_APP_ENABLE_LOG_SIEMENS_IO === 'true')
-      console.log(`UseApi: Token Changed. Token: ${apiToken.current}`)
+    SiemensLogInfo(`UseApi: Token Changed. Token: ${apiToken.current}`)
 
   }, [token]);
 
@@ -22,8 +19,7 @@ export const useApi = () => {
       throw new Error('Token non disponibile');
     const uri = `${process.env.REACT_APP_AUTH_ENDPOINT}${endpoint}`
 
-    if (REACT_APP_ENABLE_LOG_SIEMENS_IO === 'true')
-      console.log(`Siemens HTTP Request . Token: \\"${apiToken.current}\\". Date: ${Date.now()}`);
+    SiemensLogInfo(`Siemens HTTP Request . Token: \\"${apiToken.current}\\". Date: ${Date.now()}`);
 
     const res = await fetch(uri, {
       method: method,
@@ -48,15 +44,15 @@ export const useApi = () => {
 
       body.forEach((e) => {
         bodyRequest.push(
-            {
-              jsonrpc: "2.0",
-              id: e[0],
-              method: "PlcProgram.Read",
-              params: {
-                var: e[1]
-              }
+          {
+            jsonrpc: "2.0",
+            id: e[0],
+            method: "PlcProgram.Read",
+            params: {
+              var: e[1]
             }
-          );
+          }
+        );
       });
 
       var jsonResponse = await request('POST', '/api/jsonrpc', bodyRequest);

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, useRef } from 'react';
 import { useApi } from './UseApi';
-import { useSiemensAuth } from '../auth/SiemensAuthContext';
-
+import { useSiemensAuth } from './SiemensAuthContext';
+import { SiemensLogInfo, SiemensLogError } from './SiemensLog';
 const SiemensPollingContext = createContext();
 
 export const SiemensPollingProvider = ({ children }) => {
@@ -10,7 +10,6 @@ export const SiemensPollingProvider = ({ children }) => {
     const [pollingConfigs, setPollingConfigs] = useState([]);
     const timersRef = useRef({});
     const pullerFetchRunRef = useRef({});
-    const { REACT_APP_ENABLE_LOG_SIEMENS_IO } = process.env
 
     useEffect(() => {
         if (!token)
@@ -22,8 +21,7 @@ export const SiemensPollingProvider = ({ children }) => {
             const fetchData = async () => {
 
                 if (pullerFetchRunRef.current[id] !== null) {
-                    if (REACT_APP_ENABLE_LOG_SIEMENS_IO === 'true')
-                        console.log(`FatchData ${id} Skipped. Date: ${Date.now()}`);
+                    SiemensLogInfo(`FatchData ${id} Skipped. Date: ${Date.now()}`);
                     return;
                 }
 
@@ -33,12 +31,9 @@ export const SiemensPollingProvider = ({ children }) => {
 
                     if (callback)
                         callback(data);
-                    //resultsRef.current[id] = data;
-
 
                 } catch (err) {
-                    if (REACT_APP_ENABLE_LOG_SIEMENS_IO === 'true')
-                        console.error(`Polling error for ${id}:`, err);
+                    SiemensLogError(`Polling error for ${id}:`, err);
                 }
                 finally {
                     pullerFetchRunRef.current[id] = null;
