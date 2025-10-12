@@ -1,0 +1,14 @@
+{
+    "_id": "5ceeb90d-4cd1-40b2-aedf-5dd1d3d36381",
+    "name": "test",
+    "default": true,
+    "sortNum": 10000,
+    "created": "2025-10-08T08:29:16.580Z",
+    "modified": "2025-10-08T08:29:16.580Z",
+    "data": [
+        {
+            "name": "auth_token",
+            "value": "ROSfsY1pvlFWiBjyK5.MZGT9O5HB"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "firefox",
+      "request": "launch",
+      "name": "Debug con Firefox",
+      "url": "http://localhost:3000/awp",
+      "webRoot": "${workspaceFolder}/src",
+      "profile": "vscode-debug",
+      "tmpDir": "/home/sjp/firefox-tmp"
+    }
+  ]
+}

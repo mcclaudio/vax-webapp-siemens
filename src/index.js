@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import { SiemensAuthProvider } from './siemens_io/auth/SiemensAuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter basename='/awp'>
-      <App/>
+      <SiemensAuthProvider>
+        <App/>
+      </SiemensAuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

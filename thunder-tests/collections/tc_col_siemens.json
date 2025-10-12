@@ -1,0 +1,238 @@
+{
+    "_id": "33b007fd-7ded-4b1c-a218-86c553337b53",
+    "colName": "SIEMENS",
+    "created": "2025-10-08T08:14:23.239Z",
+    "sortNum": 10000,
+    "folders": [],
+    "requests": [
+        {
+            "_id": "8dc36480-25b7-4815-a713-8f59781c2b8c",
+            "colId": "33b007fd-7ded-4b1c-a218-86c553337b53",
+            "containerId": "",
+            "name": "READ",
+            "url": "https://192.168.214.1/api/jsonrpc",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2025-10-08T08:14:32.823Z",
+            "modified": "2025-10-10T15:31:50.243Z",
+            "headers": [
+                {
+                    "name": "X-Auth-Token",
+                    "value": "{{auth_token}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"PlcProgram.Read\",\n  \"params\": {\n    \"var\": \"\\\"DB_VAX_IT21\\\"._Byte[60]\"\n  }\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "f14688d2-915f-4c65-aed3-4b59243c4177",
+            "colId": "33b007fd-7ded-4b1c-a218-86c553337b53",
+            "containerId": "",
+            "name": "LOGIN",
+            "url": "https://192.168.214.1/api/jsonrpc",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2025-10-08T08:20:48.175Z",
+            "modified": "2025-10-10T15:02:51.894Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"Api.Login\",\n  \"params\": {\n    \"user\": \"WebAccess\",\n    \"password\": \"Web123456789\"\n  },\n  \"id\": \"1\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "set-env-var",
+                    "custom": "json.result.token",
+                    "action": "setto",
+                    "value": "{{auth_token}}"
+                }
+            ]
+        },
+        {
+            "_id": "efcb2f2b-02d3-4141-aba9-5837bc8ffa87",
+            "colId": "33b007fd-7ded-4b1c-a218-86c553337b53",
+            "containerId": "",
+            "name": "API BROWSE",
+            "url": "https://192.168.214.1/api/jsonrpc",
+            "method": "POST",
+            "sortNum": 15000,
+            "created": "2025-10-08T08:53:45.313Z",
+            "modified": "2025-10-10T15:18:18.993Z",
+            "headers": [
+                {
+                    "name": "X-Auth-Tokens",
+                    "value": "{{auth_token}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"Api.Browse\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "b1ca6aff-ec88-4db3-bd5f-2b7940b96d41",
+            "colId": "33b007fd-7ded-4b1c-a218-86c553337b53",
+            "containerId": "",
+            "name": "PLC Browse (Descrittore DB/Merker etc etc)",
+            "url": "https://192.168.214.20/api/jsonrpc",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2025-10-08T08:54:22.437Z",
+            "modified": "2025-10-08T08:57:04.209Z",
+            "headers": [
+                {
+                    "name": "X-Auth-Token",
+                    "value": "{{auth_token}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Browse\",\n    \"params\": {\n      \"mode\": \"children\"\n    }\n  }\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "69e1a01e-dbe2-4615-980b-13b4aa68e915",
+            "colId": "33b007fd-7ded-4b1c-a218-86c553337b53",
+            "containerId": "",
+            "name": "PLC Browse (Descrittore DB)",
+            "url": "https://192.168.214.20/api/jsonrpc",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2025-10-08T09:05:09.892Z",
+            "modified": "2025-10-08T09:06:55.283Z",
+            "headers": [
+                {
+                    "name": "X-Auth-Token",
+                    "value": "{{auth_token}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Browse\",\n    \"params\": {\n      \"mode\": \"var\",\n      \"var\" : \"\\\"DB_Pippo\\\".Disney\"\n    }\n  }\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "86afa981-bd06-4e60-a8f0-05e6cf13a493",
+            "colId": "33b007fd-7ded-4b1c-a218-86c553337b53",
+            "containerId": "",
+            "name": "READ Copy",
+            "url": "https://192.168.214.20/api/jsonrpc",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2025-10-08T09:10:13.244Z",
+            "modified": "2025-10-08T09:12:17.885Z",
+            "headers": [
+                {
+                    "name": "X-Auth-Token",
+                    "value": "{{auth_token}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "[\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n   {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  },\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\"\n    }\n  }\n]",
+                "form": []
+            }
+        },
+        {
+            "_id": "4fb3a184-df42-4ab3-9b01-76d8f3c722b8",
+            "colId": "33b007fd-7ded-4b1c-a218-86c553337b53",
+            "containerId": "",
+            "name": "READ Copy",
+            "url": "https://192.168.214.20/api/jsonrpc",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2025-10-08T09:15:00.644Z",
+            "modified": "2025-10-08T09:19:00.600Z",
+            "headers": [
+                {
+                    "name": "X-Auth-Token",
+                    "value": "{{auth_token}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "\n  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"PlcProgram.Read\",\n    \"params\": {\n      \"var\": \"\\\"DB_Pippo\\\".Disney.Anno[1]\",\n      \"mode\" : \"raw\"\n    }\n  }\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "14ee53a6-209d-4ecc-97ec-169271dce987",
+            "colId": "33b007fd-7ded-4b1c-a218-86c553337b53",
+            "containerId": "",
+            "name": "Refresh Token",
+            "url": "https://192.168.214.20/api/jsonrpc",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2025-10-09T08:30:19.517Z",
+            "modified": "2025-10-09T08:31:41.031Z",
+            "headers": [
+                {
+                    "name": "X-Auth-Token",
+                    "value": "{{auth_token}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "\n  {\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"Api.Ping\",\n    \"id\": 999\n  }\n",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "set-env-var",
+                    "custom": "json.result.token",
+                    "action": "setto",
+                    "value": "{{auth_token}}"
+                }
+            ]
+        },
+        {
+            "_id": "65cf17c7-9a3f-426a-ad26-fb5daef766c3",
+            "colId": "33b007fd-7ded-4b1c-a218-86c553337b53",
+            "containerId": "",
+            "name": "Plc.ReadOperatingMode",
+            "url": "https://192.168.214.1/api/jsonrpc",
+            "method": "POST",
+            "sortNum": 12500,
+            "created": "2025-10-10T11:59:36.607Z",
+            "modified": "2025-10-10T14:28:54.139Z",
+            "headers": [
+                {
+                    "name": "X-Auth-Token",
+                    "value": "{{auth_token}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"Plc.ReadOperatingMode\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "7aef1baf-169d-4d75-8ce7-2267d6ae32b0",
+            "colId": "33b007fd-7ded-4b1c-a218-86c553337b53",
+            "containerId": "",
+            "name": "Plc.ReadOperatingMode Copy",
+            "url": "https://192.168.214.1/api/jsonrpc",
+            "method": "POST",
+            "sortNum": 22500,
+            "created": "2025-10-10T14:25:56.337Z",
+            "modified": "2025-10-10T14:28:26.189Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"Api.Ping\"\n}",
+                "form": []
+            }
+        }
+    ],
+    "settings": {
+        "envId": "5ceeb90d-4cd1-40b2-aedf-5dd1d3d36381"
+    }
+}
