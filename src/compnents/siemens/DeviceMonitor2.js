@@ -18,8 +18,8 @@ const DeviceMonitor2 = () => {
 
     const dataRequest =
         [
-            [VAR_ANNO_3, "\"DB_VAX_IT23\"._Byte[60]"],
-            [VAR_ANNO_4, "\"DB_VAX_IT23\"._Byte[61]"],
+            [VAR_ANNO_3, "\"DB_PMS_IT23\"._Byte[60]"],
+            [VAR_ANNO_4, "\"DB_PMS_IT23\"._Byte[61]"],
         ]
 
     useEffect(() => {

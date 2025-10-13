@@ -32,7 +32,33 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.ledContainer {
+  width: 500;
+  display: flex;
+  gap: 3px;
+  margin-bottom: 3px;
+}
+
+.led {
+  width: 50px;
+  text-align: center;
+  justify-content: center;
+}
+
+.ledHeader {
+  background-color: gray;
+}
+
+.ledOn {
+  background-color: greenyellow;
+}
+
+.ledOff {
+  background-color: red;
 }
