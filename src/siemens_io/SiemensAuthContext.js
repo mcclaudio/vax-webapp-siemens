@@ -1,10 +1,12 @@
-import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
+import React, { createContext, useContext, useEffect, useState, useRef } from 'react';
 import { SiemensLogInfo, SiemensLogError } from "./SiemensLog"
 
-const SiemensAuthContext = createContext({ token: null });
+const SiemensAuthContext = createContext({ token: null, siemensError:undefined});
 
 export const SiemensAuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
+  const [siemensError, setSiemensError] = useState(undefined);
+
   const tokeRef = useRef(null);
   const myTimersRef = useRef({});
   const refreshRun = useRef(null);
@@ -33,13 +35,14 @@ export const SiemensAuthProvider = ({ children }) => {
       const data = await res.json();
 
       if (data.error)
-        throw new Error(`Siemens Error: Code: ${data.error.code}. Message: ${data.error.message}`)
+        throw new Error(`Message: ${data.error.message} [API Siemens Error (Code :${data.error.code})].`)
 
       SetCurrentToken(data.result.token);
       SiemensLogInfo(`Siemens Login . Token: \\"${tokeRef.current}\\". Date: ${Date.now()}`);
     }
     catch (err) {
       SetCurrentToken(null);
+      setSiemensError(err.message);
       SiemensLogError('Login failed:', err);
     }
   };
@@ -83,11 +86,13 @@ export const SiemensAuthProvider = ({ children }) => {
         if (data.error)
           throw new Error(`Siemens Error: Code: ${data.error.code}. Message: ${data.error.message}`)
 
+        setSiemensError(null);
         SiemensLogInfo(`Token extednded. Date: ${Date.now()}`);
       }
     }
     catch (err) {
       SetCurrentToken(null);
+      setSiemensError(err.message);
       SiemensLogError('Token refresh failed:', err);
     }
     finally {
@@ -118,7 +123,7 @@ export const SiemensAuthProvider = ({ children }) => {
 
 
   return (
-    <SiemensAuthContext.Provider value={{ token }}>
+    <SiemensAuthContext.Provider value={{ token, siemensError }}>
       {children}
     </SiemensAuthContext.Provider>
   );
