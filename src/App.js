@@ -1,61 +1,48 @@
-import logo from './logo.svg';
+import { Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
+
 import './App.css';
 import 'devextreme/dist/css/dx.light.css';
-import { Routes, Route, Link } from 'react-router-dom';
+
 import Home from './pages/home';
 import About from './pages/about';
 import NotFound from './pages/notfound';
 
-import TreeView from 'devextreme-react/tree-view';
-import config from 'devextreme/core/config'; 
-import { licenseKey } from './devextreme-license'; 
+
+import Header from './compnents/layouts/Header';
+import Sidebar from './compnents/layouts/Sidebar';
+import Footer from './compnents/layouts/Footer';
+import Items21 from './pages/vax/items/Items21'
+import Items23 from './pages/vax/items/Items23'
+import config from 'devextreme/core/config';
+
+import { licenseKey } from './devextreme-license';
 config({ licenseKey });
 
 function App() {
-
-  const navigation =
-    [
-      {
-        id: '1',
-        text: 'ITEMS',
-        expanded: true,
-        items: [
-          {
-            id: '1_1',
-            text: 'ITEMS 21',
-            expanded: true,
-          },
-          {
-            id: '1_2',
-            text: 'ITEMS 22',
-            expanded: true,
-          },
-        ]
-      }
-    ]
+  const [menuOpen, setMenuOpen] = useState(true);
 
   return (
-    <div>
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/about">About</Link>
-      </nav>
-      <div>
-        <TreeView dataSource={navigation} selectionMode="single" selectByClick={true}/>
-      </div>
-      <div style={{ display: "flex" }}>
-        <div>
+    <div className="app-container">
+      <Header toggleMenu={() => setMenuOpen(!menuOpen)} />
+      <div className="page-body">
+        <Sidebar isOpen={menuOpen} />
+        <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/index.html" element={<Home />} />
             <Route path="//*" element={<Home />} /> {/* Hack Siemens Server su redirect forzato a pagina personalizzata su root */}
+            <Route path="/vax/items21" element={<Items21 />} />
+            <Route path="/vax/items23" element={<Items23 />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </div>
+        </main>
       </div>
-
+      <Footer />
     </div>
   );
+
 }
 
 export default App;

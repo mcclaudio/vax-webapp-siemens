@@ -1,0 +1,44 @@
+.three-column-container {
+    display: flex;
+    height: calc(100vh - 250px);
+    /* Adatta se hai header/footer */
+    padding: 0px;
+    gap: 20px;
+    margin-top:10px;
+}
+
+
+
+.section-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+
+.column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.column h3 {
+    background-color: #004080;
+    color: white;
+    padding: 10px;
+    margin: 0;
+}
+
+.column-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.opacity{
+    opacity: 0.5;
+}

@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import { useSiemensPolling } from '../../siemens_io/SiemensPollingContext';
-import ByteSignlas from './ByteSignlas';
+import VaxRowByteSignals from './VaxRowByteSignals';
 
 
-function VaxInputs({ pullerName, dbname, signals }) {
+function VaxTableByteSignals({ pullerName, dbname, dbBaseAddress, signals }) {
   const { registerPolling, unregisterPolling } = useSiemensPolling();
   const byteRefs = useRef([]);
 
@@ -12,9 +12,9 @@ function VaxInputs({ pullerName, dbname, signals }) {
 
   function buildDB() {
     let db = [];
-    let baseAddress = 62;
+    let baseAddress = dbBaseAddress;
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < signals.length; i++) {
       db.push({
         SiemensVarName: `"${dbname}"._Byte[${baseAddress + i}]`,
         Signals: signals[i]
@@ -53,26 +53,24 @@ function VaxInputs({ pullerName, dbname, signals }) {
 
   }, []);
 
-
-
   return (
     <>
       <div>
         <div className='ledContainer'>
-          <div className='led ledHeader'>{" "}</div>
-          <div className="led ledHeader">7</div>
-          <div className="led ledHeader">6</div>
-          <div className="led ledHeader">5</div>
-          <div className="led ledHeader">4</div>
-          <div className="led ledHeader">3</div>
-          <div className="led ledHeader">2</div>
-          <div className="led ledHeader">1</div>
-          <div className="led ledHeader">0</div>
+          <div className='led ledHeader'>{PadTableValue(' ')}</div>
+          <div className="led ledHeader">{PadTableValue('7')}</div>
+          <div className="led ledHeader">{PadTableValue('6')}</div>
+          <div className="led ledHeader">{PadTableValue('5')}</div>
+          <div className="led ledHeader">{PadTableValue('4')}</div>
+          <div className="led ledHeader">{PadTableValue('3')}</div>
+          <div className="led ledHeader">{PadTableValue('2')}</div>
+          <div className="led ledHeader">{PadTableValue('1')}</div>
+          <div className="led ledHeader">{PadTableValue('0')}</div>
         </div>
       </div>
       {
         vax_in_db.map((item, k) =>
-          <ByteSignlas
+          <VaxRowByteSignals
             key={k}
             index={k}
             item={item}
@@ -81,4 +79,10 @@ function VaxInputs({ pullerName, dbname, signals }) {
     </>)
 }
 
-export default VaxInputs
+export function PadTableValue(value,char=' ',size=3)
+{
+   let val= value.padStart(size,char);
+   return val;
+}
+
+export default VaxTableByteSignals

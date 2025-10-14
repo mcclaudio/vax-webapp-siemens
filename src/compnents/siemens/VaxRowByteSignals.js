@@ -1,6 +1,7 @@
 import React, { useImperativeHandle, forwardRef, useState } from 'react';
-
-const ByteSignlas = forwardRef(({ index, item }, ref) => {
+import { PadTableValue } from './VaxTableByteSignals'
+import './VaxRowByteSignals.css'
+const VaxRowByteSignals = forwardRef(({ index, item }, ref) => {
 
     const [bit0, setBit0] = useState(false);
     const [bit1, setBit1] = useState(false);
@@ -11,13 +12,12 @@ const ByteSignlas = forwardRef(({ index, item }, ref) => {
     const [bit6, setBit6] = useState(false);
     const [bit7, setBit7] = useState(false);
 
-    const [value, setValue] = useState(null);
+    // const [value, setValue] = useState(null);
 
     useImperativeHandle(ref, () => ({
         updateValue: (newVal) => {
 
             let value = parseInt(newVal, 10)
-            setValue(value)
 
             setBit0((value & 1) !== 0)
             setBit1((value & 2) !== 0)
@@ -34,13 +34,13 @@ const ByteSignlas = forwardRef(({ index, item }, ref) => {
         let desc = ''
         if (item.Signals.SignalDescriptors[bitIndex])
             desc = item.Signals.SignalDescriptors[bitIndex].DisplayName
-        return desc;
+        return PadTableValue(desc);
     }
 
     return (
         <>
             <div className='ledContainer'>
-                <div className='led ledHeader'>{index + 1}</div>
+                <div className='led ledHeader'>{PadTableValue(`${index + 1}`)}</div>
                 <div className={`led ${bit7 ? 'ledOn' : 'ledOff'}`}>{getSignalDescriptor(7)}</div>
                 <div className={`led ${bit6 ? 'ledOn' : 'ledOff'}`}>{getSignalDescriptor(6)}</div>
                 <div className={`led ${bit5 ? 'ledOn' : 'ledOff'}`}>{getSignalDescriptor(5)}</div>
@@ -55,4 +55,4 @@ const ByteSignlas = forwardRef(({ index, item }, ref) => {
     )
 });
 
-export default ByteSignlas
+export default VaxRowByteSignals
