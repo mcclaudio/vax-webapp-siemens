@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, useRef } from 'react';
 import { SiemensLogInfo, SiemensLogError } from "./SiemensLog"
 
-const SiemensAuthContext = createContext({ token: null, siemensError:undefined});
+const SiemensAuthContext = createContext({ token: null, siemensError: undefined });
 
 export const SiemensAuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
@@ -16,28 +16,35 @@ export const SiemensAuthProvider = ({ children }) => {
   const login = async () => {
     try {
 
-      const res = await fetch(`${process.env.REACT_APP_AUTH_ENDPOINT}/api/jsonrpc`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(
-          {
-            jsonrpc: "2.0",
-            method: "Api.Login",
-            params: {
-              user: process.env.REACT_APP_AUTH_USER,
-              password: process.env.REACT_APP_AUTH_PASS
-            },
-            "id": 1
-          }
-        ),
-      });
+      let cToken = localStorage.getItem('SIEMENS_AUTH_TOKEN');
 
-      const data = await res.json();
+      if (!(cToken && cToken !== 'null')) {
+        
+        const res = await fetch(`${process.env.REACT_APP_AUTH_ENDPOINT}/api/jsonrpc`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(
+            {
+              jsonrpc: "2.0",
+              method: "Api.Login",
+              params: {
+                user: process.env.REACT_APP_AUTH_USER,
+                password: process.env.REACT_APP_AUTH_PASS
+              },
+              "id": 1
+            }
+          ),
+        });
 
-      if (data.error)
-        throw new Error(`Message: ${data.error.message} [API Siemens Error (Code :${data.error.code})].`)
+        const data = await res.json();
 
-      SetCurrentToken(data.result.token);
+        if (data.error)
+          throw new Error(`Message: ${data.error.message} [API Siemens Error (Code :${data.error.code})].`)
+
+        cToken = data.result.token;
+      }
+
+      SetCurrentToken(cToken);
       SiemensLogInfo(`Siemens Login . Token: \\"${tokeRef.current}\\". Date: ${Date.now()}`);
     }
     catch (err) {
@@ -49,6 +56,7 @@ export const SiemensAuthProvider = ({ children }) => {
 
   function SetCurrentToken(cToken) {
     tokeRef.current = cToken;
+    localStorage.setItem('SIEMENS_AUTH_TOKEN', cToken);
     setToken(cToken);
   }
 
@@ -119,7 +127,7 @@ export const SiemensAuthProvider = ({ children }) => {
 
     callLogin();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

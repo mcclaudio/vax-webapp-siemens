@@ -1,6 +1,6 @@
-import { Routes, Route } from 'react-router-dom';
-import React, { useState } from 'react';
-
+import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+//import { useNavigate } from 'react-router-dom';
 import './App.css';
 import 'devextreme/dist/css/dx.light.css';
 
@@ -29,9 +29,9 @@ function App() {
         <Sidebar isOpen={menuOpen} />
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/index.html" element={<Home />} />
-            <Route path="//*" element={<Home />} /> {/* Hack Siemens Server su redirect forzato a pagina personalizzata su root */}
             <Route path="/vax/items21" element={<Items21 />} />
             <Route path="/vax/items23" element={<Items23 />} />
             <Route path="/about" element={<About />} />
@@ -42,7 +42,6 @@ function App() {
       <Footer />
     </div>
   );
-
 }
 
 export default App;

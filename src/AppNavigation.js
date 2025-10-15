@@ -1,6 +1,6 @@
 export const paths = 
 {
-  home: '/index.html',
+  home: '/home',
   item21: '/vax/items21',
   item23: '/vax/items23'
 }

@@ -44,11 +44,11 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2025-10-08T08:20:48.175Z",
-            "modified": "2025-10-10T15:02:51.894Z",
+            "modified": "2025-10-15T11:55:38.499Z",
             "headers": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"Api.Login\",\n  \"params\": {\n    \"user\": \"WebAccess\",\n    \"password\": \"Web123456789\"\n  },\n  \"id\": \"1\"\n}",
+                "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"Api.Login\",\n  \"params\": {\n    \"user\": \"NovaX\",\n    \"password\": \"NovaX2000\"\n  },\n  \"id\": \"1\"\n}",
                 "form": []
             },
             "tests": [
