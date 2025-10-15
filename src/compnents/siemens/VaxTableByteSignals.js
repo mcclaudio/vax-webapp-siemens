@@ -34,6 +34,7 @@ function VaxTableByteSignals({ pullerName, dbname, dbBaseAddress, signals }) {
       const signalValue = newData[`INPUT_${k}`];
       byteRefs.current[k]?.updateValue(signalValue);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -51,6 +52,7 @@ function VaxTableByteSignals({ pullerName, dbname, dbBaseAddress, signals }) {
       unregisterPolling(pullerName);
     }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

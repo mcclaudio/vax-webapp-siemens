@@ -13,6 +13,7 @@ function Sidebar({ isOpen }) {
       if (selectedNavLink.path) {
         navigate(selectedNavLink.path);
       }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [],
   );
 

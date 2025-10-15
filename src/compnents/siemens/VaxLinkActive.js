@@ -19,6 +19,7 @@ function VaxLinkActive({ pullerName, itemsName, indexItem, evtLinkActiveChanged 
 
     }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [linkActive, setLinkActive] = useState(false);
@@ -37,6 +38,7 @@ function VaxLinkActive({ pullerName, itemsName, indexItem, evtLinkActiveChanged 
       unregisterPolling(pullerName);
     }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
