@@ -41,7 +41,7 @@ export const SiemensPollingProvider = ({ children }) => {
             };
             pullerFetchRunRef.current[id] = null;
             fetchData(); // iniziale
-            console.log(`Set Polling for ${id}`);
+            SiemensLogInfo(`Set Polling for ${id}`);
             timersRef.current[id] = setInterval(fetchData, interval);
 
         });
@@ -62,7 +62,8 @@ export const SiemensPollingProvider = ({ children }) => {
             clearInterval(timersRef.current[id]);
             delete timersRef.current[id];
             delete pullerFetchRunRef.current[id]
-            console.log(`Polling interrotto per ${id} - ${Date.now()}`);
+            
+            SiemensLogInfo(`Polling interrotto per ${id} - ${Date.now()}`);
         }
     };
 

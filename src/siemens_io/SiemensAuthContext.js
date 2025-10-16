@@ -7,7 +7,7 @@ export const SiemensAuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [siemensError, setSiemensError] = useState(undefined);
 
-  const tokeRef = useRef(null);
+  const tokeRef = useRef({ token: "", fromLocal: false });
   const myTimersRef = useRef({});
   const refreshRun = useRef(null);
 
@@ -16,10 +16,15 @@ export const SiemensAuthProvider = ({ children }) => {
   const login = async () => {
     try {
 
+      let isLocal = false;
       let cToken = localStorage.getItem('SIEMENS_AUTH_TOKEN');
 
-      if (!(cToken && cToken !== 'null')) {
-        
+      if (cToken) {
+        cToken = JSON.parse(cToken);
+        isLocal = true;
+      }
+
+      if (!(cToken && cToken.token !== "null")) {
         const res = await fetch(`${process.env.REACT_APP_AUTH_ENDPOINT}/api/jsonrpc`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -41,22 +46,22 @@ export const SiemensAuthProvider = ({ children }) => {
         if (data.error)
           throw new Error(`Message: ${data.error.message} [API Siemens Error (Code :${data.error.code})].`)
 
-        cToken = data.result.token;
+        cToken = { token: data.result.token, fromLocal: false };
       }
 
-      SetCurrentToken(cToken);
+      SetCurrentToken(cToken.token,isLocal);
       SiemensLogInfo(`Siemens Login . Token: \\"${tokeRef.current}\\". Date: ${Date.now()}`);
     }
     catch (err) {
-      SetCurrentToken(null);
       setSiemensError(err.message);
+      SetCurrentToken(null);
       SiemensLogError('Login failed:', err);
     }
   };
 
-  function SetCurrentToken(cToken) {
-    tokeRef.current = cToken;
-    localStorage.setItem('SIEMENS_AUTH_TOKEN', cToken);
+  function SetCurrentToken(cToken, isLocal = false) {
+    tokeRef.current = { token: cToken, fromLocal: isLocal };
+    localStorage.setItem('SIEMENS_AUTH_TOKEN', JSON.stringify({ token: `${cToken}`, fromLocal: true }));
     setToken(cToken);
   }
 
@@ -70,7 +75,7 @@ export const SiemensAuthProvider = ({ children }) => {
     try {
       refreshRun.current = true;
 
-      if (!tokeRef.current) {
+      if (!tokeRef.current.token) {
         await login();
       }
       else {
@@ -79,7 +84,7 @@ export const SiemensAuthProvider = ({ children }) => {
           headers:
           {
             'Content-Type': 'application/json',
-            'X-Auth-Token': tokeRef.current
+            'X-Auth-Token': tokeRef.current.token
           },
           body: JSON.stringify(
             {
@@ -99,8 +104,11 @@ export const SiemensAuthProvider = ({ children }) => {
       }
     }
     catch (err) {
+
+      if (!tokeRef.current.fromLocal)
+        setSiemensError(err.message);
+
       SetCurrentToken(null);
-      setSiemensError(err.message);
       SiemensLogError('Token refresh failed:', err);
     }
     finally {

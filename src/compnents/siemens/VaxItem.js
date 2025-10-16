@@ -44,9 +44,9 @@ function VaxItem({ itemData }) {
                     </div>
 
 
-                    <div className={`three-column-container ${!linkActive ? 'opacity' : ''}`}>
+                    <div className={`three-column-container ${linkActive === false ? 'opacity' : ''}`}>
                         <div className="column">
-                            <h3>VAX - Inputs</h3>
+                            <h3>{itemData.DisplayName} State</h3>
                             <div className="column-content">
                                 <VaxTableByteSignals
                                     dbname={itemData.DbName}
@@ -57,7 +57,7 @@ function VaxItem({ itemData }) {
                             </div>
                         </div>
                         <div className="column">
-                            <h3>VAX - Outputs</h3>
+                            <h3>VAX - Outputs Feedback</h3>
                             <div className="column-content">
                                 <VaxTableByteSignals
                                     dbname={itemData.DbName}

@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState,useRef } from 'react';
 import { useSiemensPolling } from '../../siemens_io/SiemensPollingContext';
 import { PiPlugsConnectedFill } from 'react-icons/pi';
 import { TbPlugConnectedX } from 'react-icons/tb';
@@ -7,21 +7,25 @@ import { MdUpdate } from 'react-icons/md';
 function VaxLinkActive({ pullerName, itemsName, indexItem, evtLinkActiveChanged }) {
   const { registerPolling, unregisterPolling } = useSiemensPolling();
 
+
   const evtDataChange = useCallback((newData) => {
     var linksActive = parseInt(newData[`LinksActive`]);
 
-    let oldValue = linkActive;
+    let oldValue = linkActiveRef.current;
     let newValue = (linksActive & (2 ** indexItem)) !== 0;
-    setLinkActive(newValue)
+
+    linkActiveRef.current = newValue;
+    setLinkActive(newValue) 
     setTime(newData.timestamp);
+
     if (oldValue !== newValue && evtLinkActiveChanged) {
       evtLinkActiveChanged({ linkActive: newValue });
 
     }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const linkActiveRef = useRef(false);
   const [linkActive, setLinkActive] = useState(false);
   const [time, setTime] = useState();
 
@@ -38,7 +42,7 @@ function VaxLinkActive({ pullerName, itemsName, indexItem, evtLinkActiveChanged 
       unregisterPolling(pullerName);
     }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

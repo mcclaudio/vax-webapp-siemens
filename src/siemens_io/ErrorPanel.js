@@ -7,8 +7,12 @@ function ErrorPanel({ message }) {
             <div>
                 <BiError size={100} color='orange' />
             </div>
-            <div>
-                {message}
+            <div style={{textAlign:"center"}}>
+                <div><h3>Errore verso PLC concentratore</h3></div>
+                <div>
+                    <span>Dettaglio: </span>
+                    <span>{message}</span>
+                </div>
             </div>
         </div>
     )

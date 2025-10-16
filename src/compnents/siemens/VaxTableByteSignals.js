@@ -34,7 +34,7 @@ function VaxTableByteSignals({ pullerName, dbname, dbBaseAddress, signals }) {
       const signalValue = newData[`INPUT_${k}`];
       byteRefs.current[k]?.updateValue(signalValue);
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -52,22 +52,22 @@ function VaxTableByteSignals({ pullerName, dbname, dbBaseAddress, signals }) {
       unregisterPolling(pullerName);
     }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <div>
         <div className='ledContainer'>
-          <div className='led ledHeader'>{PadTableValue(' ')}</div>
-          <div className="led ledHeader">{PadTableValue('7')}</div>
-          <div className="led ledHeader">{PadTableValue('6')}</div>
-          <div className="led ledHeader">{PadTableValue('5')}</div>
-          <div className="led ledHeader">{PadTableValue('4')}</div>
-          <div className="led ledHeader">{PadTableValue('3')}</div>
-          <div className="led ledHeader">{PadTableValue('2')}</div>
-          <div className="led ledHeader">{PadTableValue('1')}</div>
-          <div className="led ledHeader">{PadTableValue('0')}</div>
+          <div className='led ledHeader'><span dangerouslySetInnerHTML={{ __html: PadTableValue(' ')}}></span></div>
+          <div className="led ledHeader"><span dangerouslySetInnerHTML={{ __html: PadTableValue('7')}}></span></div>
+          <div className="led ledHeader"><span dangerouslySetInnerHTML={{ __html: PadTableValue('6')}}></span></div>
+          <div className="led ledHeader"><span dangerouslySetInnerHTML={{ __html: PadTableValue('5')}}></span></div>
+          <div className="led ledHeader"><span dangerouslySetInnerHTML={{ __html: PadTableValue('4')}}></span></div>
+          <div className="led ledHeader"><span dangerouslySetInnerHTML={{ __html: PadTableValue('3')}}></span></div>
+          <div className="led ledHeader"><span dangerouslySetInnerHTML={{ __html: PadTableValue('2')}}></span></div>
+          <div className="led ledHeader"><span dangerouslySetInnerHTML={{ __html: PadTableValue('1')}}></span></div>
+          <div className="led ledHeader"><span dangerouslySetInnerHTML={{ __html: PadTableValue('0')}}></span></div>
         </div>
       </div>
       {
@@ -81,10 +81,12 @@ function VaxTableByteSignals({ pullerName, dbname, dbBaseAddress, signals }) {
     </>)
 }
 
-export function PadTableValue(value,char=' ',size=3)
-{
-   let val= value.padStart(size,char);
-   return val;
+export function PadTableValue(value, char = ' ', size = 3) {
+  if (!value)
+    value = "";
+
+  let val = value.padStart(size, char);
+  return val;
 }
 
 export default VaxTableByteSignals
